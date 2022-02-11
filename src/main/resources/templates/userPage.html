@@ -48,8 +48,9 @@
                                     <div class="container mb-5 mt-5">
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <div th:each="product:${category.productList}">
                                             <div class="card h-100" th:fragment="productCard">
-                                                <a href="#" th:href="@{'/product/'+${product.id}}"></a>
+                                                <a href="#" th:href="@{'/product/'+${product.idproduct}}"></a>
                                                 <div class="card-body">
                                                     <h4 class="card-title">
                                                         <a href="#" th:text="${product.name}"></a>
@@ -59,7 +60,7 @@
                                                         
                                                     </p>
                                                 </div>
-                                                
+                                            </div>   
                                   <!--  <div th:each="product:${category.productList}">
                                         <p th:text="${product.name}"></p>-->
                                     </div>
