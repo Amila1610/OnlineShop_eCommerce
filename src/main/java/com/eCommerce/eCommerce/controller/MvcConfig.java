@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.controller;
 
 import org.springframework.context.annotation.Configuration;
@@ -19,13 +14,14 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/aboutUs").setViewName("aboutUs");
         registry.addViewController("/userPage").setViewName("userPage");
         registry.addViewController("/adminPage").setViewName("adminPage");
         registry.addViewController("/registration").setViewName("registration");
         registry.addViewController("/user/getusers").setViewName("user");
-        registry.addViewController("/login").setViewName("loginPage");
-        registry.addViewController("/order").setViewName("order");
+        registry.addViewController("/loginPage").setViewName("loginPage");
+        registry.addViewController("/orders").setViewName("order");
+        registry.addViewController("/shoppingCart").setViewName("shoppingCart");
+        registry.addViewController("/userDash").setViewName("userDash");
     }
 
     @Override

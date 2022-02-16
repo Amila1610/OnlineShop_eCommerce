@@ -1,33 +1,30 @@
 package com.eCommerce.eCommerce.service;
 
-import com.eCommerce.eCommerce.model.Order;
 import com.eCommerce.eCommerce.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public  class JdbcOrderService implements OrderService {
+public class JdbcOrderService implements OrderService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
     public int save(Orders order) {
-        return jdbcTemplate.update("INSERT INTO orders (idorder, amount, shipping_address, order_date) VALUES(?,?,?,?)",
-                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()});
+        return jdbcTemplate.update("INSERT INTO orders (amount, shipping_address, order_date,user_id) VALUES(?,?,?,?)",
+                new Object[]{order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getUserId().getIduser()});
     }
 
     @Override
     public int update(Orders order) {
-        return jdbcTemplate.update("UPDATE orders SET idorder=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
-                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(),order.getIdorder()});
+        return jdbcTemplate.update("UPDATE orders SET user_id=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
+                new Object[]{order.getUserId().getIduser(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getIdorder()});
     }
 
     @Override
@@ -36,6 +33,17 @@ public  class JdbcOrderService implements OrderService {
             return jdbcTemplate.queryForObject(
                     "SELECT * FROM orders JOIN users ON users.iduser = orders.user_id WHERE idorder=?",
                     BeanPropertyRowMapper.newInstance(Orders.class), id);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Orders findLast() {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM orders JOIN users ON users.iduser = orders.user_id ORDER BY idorder DESC LIMIT 1",
+                    BeanPropertyRowMapper.newInstance(Orders.class));
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }

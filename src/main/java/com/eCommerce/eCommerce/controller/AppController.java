@@ -30,18 +30,23 @@ public class AppController {
         return new ModelAndView("adminPage");
     }
 
+    @RequestMapping("/")
+    public ModelAndView home() {
+        return new ModelAndView("home");
+    }
+
     @RequestMapping(value = "/loginPage")
     public ModelAndView loginPage() {
         return new ModelAndView("loginPage");
     }
 
     @RequestMapping("/productCategory/update")
-    public ModelAndView update(){
+    public ModelAndView update() {
         return new ModelAndView("productCategory");
     }
 
-     @RequestMapping("/registration")
-    public ModelAndView registration(){
+    @RequestMapping("/registration")
+    public ModelAndView registration() {
         return new ModelAndView("registration");
     }
 
@@ -50,13 +55,18 @@ public class AppController {
         return new ModelAndView("product");
     }
 
+    @RequestMapping("/products")
+    public ModelAndView products() {
+        return new ModelAndView("products");
+    }
+
     @RequestMapping("/product/add")
     public ModelAndView addProduct() {
         return new ModelAndView("product");
     }
 
     @RequestMapping("/user")
-    public ModelAndView user(){
+    public ModelAndView user() {
         return new ModelAndView("user");
     }
 
@@ -70,15 +80,13 @@ public class AppController {
         return new ModelAndView("order");
     }
 
-
-    @RequestMapping("/products")
-    public ModelAndView products(){
-        return new ModelAndView("products");
+    @RequestMapping("/userDash")
+    public ModelAndView userDash() {
+        return new ModelAndView("userDash");
     }
 
-
     @RequestMapping("/productCategory")
-    public ModelAndView pC() {
+    public ModelAndView productCate() {
         return new ModelAndView("productCategory");
     }
 
@@ -87,24 +95,29 @@ public class AppController {
         return new ModelAndView("productCategory");
     }
 
-     @RequestMapping("/productCategory/add")
-    public ModelAndView addProductCategory(){
+    @RequestMapping("/productCategory/add")
+    public ModelAndView addProductCategory() {
         return new ModelAndView("productCategory");
     }
 
     @RequestMapping("/cart")
-    public ModelAndView cart(){
+    public ModelAndView cart() {
         return new ModelAndView("cart");
     }
 
     @RequestMapping("/shopingCart")
-    public ModelAndView shopingCart(){
+    public ModelAndView shopingCart() {
         return new ModelAndView("shopingCart");
     }
 
     @RequestMapping("/product/getproduct")
     public ModelAndView productsByCategory() {
         return new ModelAndView("productsByCategory");
+    }
+
+    @RequestMapping("/shoppingCart")
+    public ModelAndView shoppingCart() {
+        return new ModelAndView("shoppingCart");
     }
 
 }

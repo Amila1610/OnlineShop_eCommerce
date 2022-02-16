@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,19 +24,15 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author bnc
- */
 @Entity
 @Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
-    @NamedQuery(name = "Orders.findByIdorder", query = "SELECT o FROM Orders o WHERE o.idorder = :idorder"),
-    @NamedQuery(name = "Orders.findByAmount", query = "SELECT o FROM Orders o WHERE o.amount = :amount"),
-    @NamedQuery(name = "Orders.findByShippingAddress", query = "SELECT o FROM Orders o WHERE o.shippingAddress = :shippingAddress"),
-    @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate")})
+        @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
+        @NamedQuery(name = "Orders.findByIdorder", query = "SELECT o FROM Orders o WHERE o.idorder = :idorder"),
+        @NamedQuery(name = "Orders.findByAmount", query = "SELECT o FROM Orders o WHERE o.amount = :amount"),
+        @NamedQuery(name = "Orders.findByShippingAddress", query = "SELECT o FROM Orders o WHERE o.shippingAddress = :shippingAddress"),
+        @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate")})
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,10 +50,12 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "orderId")
     private List<ProductOrder> productOrderList;
-    @JoinColumn(name = "user_id", referencedColumnName = "iduser")
+    @JoinColumn(name = "user_id", referencedColumnName = "iduser", nullable = false)
     @ManyToOne(optional = false)
     private User userId;
 
@@ -68,6 +64,13 @@ public class Orders implements Serializable {
 
     public Orders(Integer idorder) {
         this.idorder = idorder;
+    }
+
+    public Orders(int amount, String shippingAddress, Date orderDate, User iduser) {
+        this.amount = amount;
+        this.shippingAddress = shippingAddress;
+        this.orderDate = orderDate;
+        this.userId = iduser;
     }
 
     public Orders(Integer idorder, int amount, String shippingAddress, Date orderDate) {
@@ -150,5 +153,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.Order[ idorder=" + idorder + " ]";
     }
-    
+
 }
