@@ -11,32 +11,37 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
 </head>
 <body>
-
-<h2>Products</h2>
-
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4527A0;">
-
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/home">
             <img src="/images/logoo.png" alt="" width="30" height="30">
         </a>
-        <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
+        <a href="/home" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
         <div class="collapse navbar-collapse" id="navmenu" style="color:#f0ad4e;">
             Products
         </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        <form class="d-flex">
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link"  href="/adminPage" style="color: #f0ad4e ">Back on dashboard</a>
+                            <a class="nav-link" th:href="@{/logout}" style="color: #ff6666 ">Sign Out</a>
+                        </div>
+                    </div>
+                </form> 
     </div>
 </nav>
-
-
 <!-- ADD Modal -->
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="background-color:#2a2fbf">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Insert New Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/product/add" method="POST" class="needs-validation" novalidate >
+            <form action="/product/add" method="POST" class="needs-validation" novalidate>
 
                 <div class="modal-body">
 
@@ -93,7 +98,6 @@
             data-align="right">Add New Product
     </button>
 </div>
-
 <!-- EDIT Modal -->
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -104,7 +108,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -118,7 +121,6 @@
         </div>
     </div>
 </div>
-
 <table id="product"
        class="table table-striped"
        data-toggle="table"
@@ -147,7 +149,6 @@
     </tr>
     </thead>
 </table>
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
